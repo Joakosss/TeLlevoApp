@@ -9,9 +9,11 @@ import { QrChoferPageRoutingModule } from './qr-chofer-routing.module';
 import { QrChoferPage } from './qr-chofer.page';
 
 import { ModuloModule } from 'src/app/componentes/modulo/modulo.module';
+import { QrCodeModule } from 'ng-qrcode';
 
 @NgModule({
   imports: [
+    QrCodeModule,
     CommonModule,
     FormsModule,
     IonicModule,

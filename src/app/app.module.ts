@@ -10,10 +10,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { AngularFireModule} from '@angular/fire/compat';
+import { QrCodeModule } from 'ng-qrcode';
+
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+  imports: [QrCodeModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
 	  AngularFirestoreModule,
   ],

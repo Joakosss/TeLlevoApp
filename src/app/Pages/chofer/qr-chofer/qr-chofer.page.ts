@@ -11,9 +11,13 @@ export class QrChoferPage implements OnInit {
   constructor(private navCtrl: NavController,) { }
 
   ngOnInit() {
-    if (localStorage.getItem('perfil')==='pasajero') {
-      this.navCtrl.navigateRoot('qr-pasajero')
-    }
+    this.valorQrTexto=JSON.stringify(this.valorQr)
   }
 
+  valorQrTexto: string='QrChofer'
+
+  valorQr={
+    codigoViaje: '0001', codChofer:'022',
+    lat:-6632, long:700.0
+  }
 }
