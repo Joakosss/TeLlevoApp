@@ -15,7 +15,11 @@ import { environment } from 'src/environments/environment';
 })
 export class HomePasajeroPage implements OnInit {
 
-  constructor(private navCtrl: NavController,) { }
+  constructor(private navCtrl: NavController,
+              private crudViaje: CrudViajeService,
+              private crudChofer: CrudChoferService,
+
+  ) { }
 
   ngOnInit() {
     if (localStorage.getItem('perfil')==='chofer') {
@@ -23,6 +27,9 @@ export class HomePasajeroPage implements OnInit {
     }
     this.listar();
   }
+
+  viajes : Viaje[]
+  idPasajero = localStorage.getItem('idUsuario')
 
   ionViewWillEnter(){
     if (localStorage.getItem('perfil')==='chofer') {
