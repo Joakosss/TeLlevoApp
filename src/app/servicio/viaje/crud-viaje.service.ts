@@ -68,6 +68,10 @@ export class CrudViajeService {
   listarViajesChofer(idChofer: string) {
     return this.afs.collection('viaje', ref => ref.where('chofer', '==', idChofer)).valueChanges({idField: 'uid'})};
   
+  listarViajesPasajero(idPasajero: string) {
+    return this.afs.collection('viaje', ref => ref.where('pasajeros', 'array-contains', idPasajero)).valueChanges({ idField: 'uid' });
+  }
+  
   modificarEstadoViaje(idViaje : string) {
     return this.afs.collection('viaje').doc(idViaje).update({
       finalizado:true,

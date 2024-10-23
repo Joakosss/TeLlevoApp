@@ -2,24 +2,53 @@
 
 <ion-content [fullscreen]="true">
   <app-header></app-header>
-  <section class="card" *ngFor="let viaje of viajes" >
-    <div class="hijo">
-      <p>Destino: <strong>{{viaje.destino}}</strong></p>
-      <p style="color: green;" *ngIf="!viaje.finalizado" >En proceso</p>
-      <p style="color: blue;" *ngIf="viaje.finalizado">Finalizado</p>
-    </div>
-    <div class="hijo">
-      <p>Cantidad de Asientos: <strong>{{viaje.numPasajeros}}</strong></p>
-      <p>Asientos ocupados: <strong>{{viaje.numPasajeros-viaje.contadorPasajeros}}</strong></p>
-    </div>
-    <p>Valor pasaje: <strong>${{viaje.valor}}</strong></p>
-    <p>Punto de encuentro: <strong>{{viaje.punto_encuentro}}</strong></p>
-    <p>Fecha: <strong>S/F</strong></p>
-    <div style="text-align: center;">
-      <ion-button [disabled]="viaje.finalizado" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
-      <ion-button [disabled]="viaje.finalizado" (click)="finalizarViaje(viaje.uid)" color="primary">Finalizar<ion-icon name="hand-left-outline"></ion-icon></ion-button>
-      <ion-button [disabled]="viaje.finalizado" (click)="eliminarViaje(viaje.uid)"color="primary">Eliminar<ion-icon name="trash-outline"></ion-icon></ion-button>
-    </div>
+  <section *ngFor="let viaje of viajes">
+    <article class="card"  *ngIf="!viaje.finalizado">
+      <div class="hijo">
+        <p>Destino: <strong>{{viaje.destino}}</strong></p>
+        <p style="color: green;" *ngIf="!viaje.finalizado" >En proceso</p>
+        <p style="color: blue;" *ngIf="viaje.finalizado">Finalizado</p>
+      </div>
+      <div class="hijo">
+        <p>Cantidad de Asientos: <strong>{{viaje.numPasajeros}}</strong></p>
+        <p>Asientos ocupados: <strong>{{viaje.numPasajeros-viaje.contadorPasajeros}}</strong></p>
+      </div>
+      <p>Valor pasaje: <strong>${{viaje.valor}}</strong></p>
+      <p>Punto de encuentro: <strong>{{viaje.punto_encuentro}}</strong></p>
+      <div class="hijo">
+        <p>Fecha: <strong>S/F</strong></p>
+        <p>Hora: <strong>{{viaje.hora_inicio}}</strong></p>
+      </div>
+      <div style="text-align: center;">
+        <ion-button [disabled]="viaje.finalizado" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="finalizarViaje(viaje.uid)" color="primary">Finalizar<ion-icon name="hand-left-outline"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="eliminarViaje(viaje.uid)"color="primary">Eliminar<ion-icon name="trash-outline"></ion-icon></ion-button>
+      </div>
+    </article>
+  </section>
+  <section *ngFor="let viaje of viajes">
+    <article class="card"  *ngIf="viaje.finalizado">
+      <div class="hijo">
+        <p>Destino: <strong>{{viaje.destino}}</strong></p>
+        <p style="color: green;" *ngIf="!viaje.finalizado" >En proceso</p>
+        <p style="color: blue;" *ngIf="viaje.finalizado">Finalizado</p>
+      </div>
+      <div class="hijo">
+        <p>Cantidad de Asientos: <strong>{{viaje.numPasajeros}}</strong></p>
+        <p>Asientos ocupados: <strong>{{viaje.numPasajeros-viaje.contadorPasajeros}}</strong></p>
+      </div>
+      <p>Valor pasaje: <strong>${{viaje.valor}}</strong></p>
+      <p>Punto de encuentro: <strong>{{viaje.punto_encuentro}}</strong></p>
+      <div class="hijo">
+        <p>Fecha: <strong>S/F</strong></p>
+        <p>Hora: <strong>{{viaje.hora_inicio}}</strong></p>
+      </div>
+      <div style="text-align: center;">
+        <ion-button [disabled]="viaje.finalizado" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="finalizarViaje(viaje.uid)" color="primary">Finalizar<ion-icon name="hand-left-outline"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="eliminarViaje(viaje.uid)"color="primary">Eliminar<ion-icon name="trash-outline"></ion-icon></ion-button>
+      </div>
+    </article>
   </section>
   <div *ngIf="cargandoFlag" class="spinner">
     <mat-spinner style="top: 10rem"></mat-spinner>

@@ -12,6 +12,8 @@ export interface Viaje {
     contadorPasajeros: number | null;
     finalizado:boolean;
 
+    latitud: number | null;
+    longitud: number | null;
 } 
 
 export function viajeVacio(): Viaje {
@@ -25,6 +27,8 @@ export function viajeVacio(): Viaje {
         valor: null ,
         numPasajeros: null,
         contadorPasajeros: null,
-        finalizado:false
+        finalizado:false,
+        latitud: null,
+        longitud: null
     };
 }; 

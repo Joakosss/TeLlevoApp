@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Pasajero } from 'src/app/model/Pasajero';
+import { Viaje } from 'src/app/model/Viaje';
 import { CrudPasajeroService } from 'src/app/servicio/pasajero/crud-pasajero.service';
 import { CrudViajeService } from 'src/app/servicio/viaje/crud-viaje.service';
 import Swal from 'sweetalert2';
@@ -26,22 +28,25 @@ export class MisviajesChoferPage implements OnInit {
   }
   
   viajes : any = [];
-  cargandoFlag = true;
+  cargandoFlag = false;
 
-  async listar(){
+  async listar() {
     try {
-      await this.crudViaje.listarViajesChofer(localStorage.getItem('idUsuario')||'').subscribe(data=>{
-        this.viajes=data.reverse();
-      })
-    } catch (error) { 
+      await this.crudViaje.listarViajesChofer(localStorage.getItem('idUsuario') || '').subscribe(data => {
+        this.viajes = data;
+        console.log(this.viajes);
+      });
+    } catch (error) {
       Swal.fire({
-        icon:'error',
+        icon: 'error',
         title: 'Problemas al compilar tus viajes :C',
         text: 'inténtelo más tarde',
         heightAuto: false
-      })
+      });
     }
   }
+
+
 
   async finalizarViaje(idViaje:string){
     try {

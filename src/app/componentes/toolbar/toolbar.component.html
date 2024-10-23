@@ -5,11 +5,14 @@
       <ion-toolbar class="toolbar">
         
         <ion-buttons slot="primary" class="custom-buttons">
+          <!-- volver al home -->
+          <ion-button *ngIf="perfil === 'chofer'" (click)="navPagina('/home-chofer')">
+            <ion-icon class="ion--home-sharp"></ion-icon>
+          </ion-button>
           <!-- botones menú chofer -->
           <ion-button *ngIf="perfil === 'chofer'" (click)="navPagina('/misviajes-chofer')">
             <ion-icon class="bxs--car"></ion-icon>
           </ion-button>
-
           <!--Aqui deberia abrir la camara-->
           <ion-button *ngIf="perfil === 'chofer'" (click)="navPagina('/qr-chofer')">
             <ion-icon class="bx--qr"></ion-icon>
@@ -20,6 +23,11 @@
           </ion-button>
 
           <!-- botones menú pasajero -->
+          <!-- volver al home -->
+          <ion-button *ngIf="perfil === 'pasajero'" (click)="navPagina('/home-pasajero')">
+            <ion-icon class="ion--home-sharp"></ion-icon>
+          </ion-button>
+
           <ion-button *ngIf="perfil === 'pasajero'" (click)="navPagina('/misviajes-pasajero')">
             <ion-icon class="bxs--car"></ion-icon>
           </ion-button>
@@ -31,10 +39,6 @@
           
           <ion-button *ngIf="perfil === 'pasajero'" (click)="navPagina('/perfil-pasajero')">
             <ion-icon class="iconamoon--profile-fill"></ion-icon>
-          </ion-button>
-          
-          <ion-button>
-            <ion-icon class="ion--search"></ion-icon>
           </ion-button>
         </ion-buttons>
 

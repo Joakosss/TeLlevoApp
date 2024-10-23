@@ -3,6 +3,46 @@
 <ion-content  [fullscreen]="true">
   <app-header></app-header>  
   <!--Programar desde aqui: -->
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div style="position: relative; " >
+          <ion-searchbar debounce=500 (ionInput)="busqueda($event)"  [value]="dire_seleccion" placeholder="Ingrese dirección"></ion-searchbar>
+          <div style="position: absolute; width: 100%; z-index: 999;">
+            <ion-list lines="none" style="background-color: transparent;">
+              <ion-item button *ngFor="let direccion of direcciones" (click)="seleccionar(direccion)">
+                {{direccion.nombre}}
+              </ion-item>
+              <div style="text-align: center; background-color: transparent; position:s ; " >
+                <ion-button class="btn" (click)="crearViaje()">Crear viaje</ion-button>
+                <ion-button class="btn" (click)="borrarDireccion()">Borrar</ion-button>
+              </div>
+              
+            </ion-list>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <div id="mapa-box" style="width: 100%; height: 600px"></div>
+  </ion-grid>
+  
+<!--   <div style="display: flex; flex-direction: column; height: 100vh;">
+    
+    <ion-card style="flex-shrink: 0; margin: 20px; border-radius: 5px; ">
+      <ion-card-header>
+        <ion-card-title>Destino</ion-card-title>
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+    
+      
+    </ion-card>
+  </div>
+   -->
+  
 </ion-content>
 
 <app-toolbar></app-toolbar>

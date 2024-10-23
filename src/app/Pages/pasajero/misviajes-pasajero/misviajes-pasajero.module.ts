@@ -9,6 +9,7 @@ import { MisviajesPasajeroPageRoutingModule } from './misviajes-pasajero-routing
 import { MisviajesPasajeroPage } from './misviajes-pasajero.page';
 
 import { ModuloModule } from 'src/app/componentes/modulo/modulo.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ModuloModule } from 'src/app/componentes/modulo/modulo.module';
     FormsModule,
     IonicModule,
     MisviajesPasajeroPageRoutingModule,
-    ModuloModule
+    ModuloModule,
+    MatProgressSpinnerModule
   ],
   declarations: [MisviajesPasajeroPage]
 })

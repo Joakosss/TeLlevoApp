@@ -12,12 +12,15 @@ import { AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { AngularFireModule} from '@angular/fire/compat';
 import { QrCodeModule } from 'ng-qrcode';
 
+// importar para el mapa
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [QrCodeModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
 	  AngularFirestoreModule,
+    HttpClientModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync()],
   bootstrap: [AppComponent],

@@ -20,15 +20,18 @@ export class CrearViajePage implements OnInit {
   cargandoFlag      : boolean        = false;
   idChofer : string|null = localStorage.getItem('idUsuario')
   
+  direccion: string = '';
 
   constructor(private crud:CrudViajeService,
               private navCtrl:NavController,
   ) { }
 
-  ngOnInit() {}
-
-
-
+  ngOnInit() {
+    const direccion_guardada = localStorage.getItem("nombre_direccion");
+    if (direccion_guardada != null) {
+      this.viaje.destino = direccion_guardada;
+    }
+  }
   valDestino()       { this.errDestino = this.viaje.destino !== '';}
   valMonto()         { this.errMonto = this.viaje.valor !== null;}
   valPuntoEncuentro(){ this.errPuntoEncuentro = this.viaje.punto_encuentro !== ''  ;}
@@ -54,13 +57,13 @@ export class CrearViajePage implements OnInit {
     }
   }
 
-
   grabar(){
     this.cargandoFlag = true;
     if (this.idChofer) {
       this.viaje.contadorPasajeros = this.viaje.numPasajeros;
       this.viaje.chofer = this.idChofer;
       this.crud.grabar(this.viaje).then(()=>{
+      localStorage.removeItem("nombre_direccion");
         Swal.fire({
           icon:'success',
           title: 'Viaje creado con éxito!',

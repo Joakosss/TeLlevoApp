@@ -1,0 +1,39 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin: 1rem 5% 0;
+    padding-bottom: 1rem;
+    border-radius: 2rem;
+
+    background-color: rgb(248, 248, 248);
+}
+
+
+.card p, ion-button {
+    margin: 0.8rem 1rem 0 1rem;
+}
+ion-button{
+    width: 8rem;
+}
+
+.card .hijo{
+    display: flex; flex-direction: row; gap: 3rem;
+}
+
+
+.hijo p {
+    width: 50%;
+}
+.spinner {
+    background: rgb(190, 190, 190);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex; /* Agrega esta línea */
+    justify-content: center; /* Centra horizontalmente */
+    /* align-items: center;   */
+  }
+  

@@ -23,15 +23,10 @@
     </section>
     <section class="inferior">
       <h5>Sobre mi</h5>
-      <p>Nombre: {{pasajero.nombre + ' ' + pasajero.apellido}}</p>
-      <p>Genero: {{pasajero.genero}}</p>
-      <hr />
-    </section>
-    <section class="inferior">
-      <h5>Mis Viajes</h5>
-      <p>viajes totales: n°</p>
-      <app-viajes [destino]="'probando'" [hora]="'10:20'" [fecha]="'10/10/2025'" [monto]="'$5.000'"
-        [chofer]="'Pepito Pérez'"></app-viajes>
+      <p>Nombre: <strong>{{pasajero.nombre + ' ' + pasajero.apellido}}</strong></p>
+      <p>Genero: <strong>{{pasajero.genero}}</strong></p>
+      <p>Correo: <strong>{{pasajero.correoElectronico}}</strong></p>
+
     </section>
   </article>
   <article *ngIf="modFlag" class="perf-inferior"> 
