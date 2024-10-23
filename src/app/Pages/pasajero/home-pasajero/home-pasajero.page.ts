@@ -31,8 +31,6 @@ export class HomePasajeroPage implements OnInit {
     this.listar();
   }
 
-  viajes : Viaje[]
-  idPasajero = localStorage.getItem('idUsuario')
 
   ionViewWillEnter(){
     if (localStorage.getItem('perfil')==='chofer') {
