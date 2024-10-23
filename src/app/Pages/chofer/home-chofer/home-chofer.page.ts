@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Feature, ServicioMapboxService } from 'src/app/servicio/mapa/servicio-mapbox.service';
 import { HttpClient } from '@angular/common/http';
 import { Direccion } from 'src/app/model/Direccion';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home-chofer',
@@ -61,7 +62,12 @@ export class HomeChoferPage implements OnInit {
       localStorage.setItem("nombre_direccion", this.dire_seleccion);
       this.navPagina('/crear-viaje/');
     } else {
-      alert('Debe seleccionar una dirección válida antes de crear el viaje.');
+      Swal.fire({
+        icon: 'error',
+        title: 'No se puede iniciar viaje',
+        text: 'Ingrese dirección válida',
+        heightAuto: false
+      })
     }
   }
 
