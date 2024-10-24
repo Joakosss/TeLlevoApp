@@ -64,8 +64,6 @@ export class HomeChoferPage implements OnInit {
   crearViaje() {
     if (this.validarDireccion()) {
       this.componentFlag=false;
-/*       localStorage.setItem("nombre_direccion", this.dire_seleccion);
-      this.navPagina('/crear-viaje/'); */
     } else {
       Swal.fire({
         icon: 'error',
@@ -98,7 +96,7 @@ export class HomeChoferPage implements OnInit {
   }
 
   seleccionar(direccion: Direccion){
-    console.log('Dirección seleccionada:', direccion);
+/*     console.log('Dirección seleccionada:', direccion); */
     this.dire_seleccion = direccion.nombre;
     this.lat_seleccion = direccion.lat;
     this.lng_seleccion = direccion.lng;
@@ -139,6 +137,9 @@ export class HomeChoferPage implements OnInit {
 
   borrarDireccion(){
     this.direcciones = []
+    this.dire_seleccion = '' 
+    this.lat_seleccion  = null 
+    this.lng_seleccion  = null 
     this.mapa()
     this.eliminarMarcador()
   }
