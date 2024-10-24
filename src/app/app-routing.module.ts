@@ -114,14 +114,6 @@ const routes: Routes = [
       canActivate: [activadoGuard]
   },
   {
-    path: 'crear-viaje',
-    loadChildren: () =>
-      import('./Pages/chofer/crear-viaje/crear-viaje.module').then(
-        (m) => m.CrearViajePageModule
-      ),
-      canActivate: [activadoGuard]
-  },
-  {
     path: 'mod-viaje',
     loadChildren: () =>
       import('./Pages/chofer/mod-viaje/mod-viaje.module').then(
