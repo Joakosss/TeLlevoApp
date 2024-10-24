@@ -33,6 +33,10 @@ export class HomeChoferPage implements OnInit {
     private http: HttpClient,
   ) { }
 
+  componentFlag : boolean = true;
+
+
+
   ngOnInit():void {}
 
   ionViewWillEnter(){
@@ -59,8 +63,9 @@ export class HomeChoferPage implements OnInit {
   // Redirecciona a pagina crear viaje 
   crearViaje() {
     if (this.validarDireccion()) {
-      localStorage.setItem("nombre_direccion", this.dire_seleccion);
-      this.navPagina('/crear-viaje/');
+      this.componentFlag=false;
+/*       localStorage.setItem("nombre_direccion", this.dire_seleccion);
+      this.navPagina('/crear-viaje/'); */
     } else {
       Swal.fire({
         icon: 'error',

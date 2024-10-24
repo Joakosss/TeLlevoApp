@@ -9,6 +9,7 @@ import { HomeChoferPageRoutingModule } from './home-chofer-routing.module';
 import { HomeChoferPage } from './home-chofer.page';
 
 import { ModuloModule } from 'src/app/componentes/modulo/modulo.module';
+import { CrearViajeComponent } from 'src/app/componentes/crear-viaje/crear-viaje.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { ModuloModule } from 'src/app/componentes/modulo/modulo.module';
     FormsModule,
     IonicModule,
     HomeChoferPageRoutingModule,
-    ModuloModule
+    ModuloModule,
   ],
   declarations: [HomeChoferPage]
 })
