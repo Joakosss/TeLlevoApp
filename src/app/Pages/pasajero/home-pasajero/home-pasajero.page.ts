@@ -32,7 +32,7 @@ export class HomePasajeroPage implements OnInit {
   }
 
 
-  ionViewWillEnter(){
+/*   ionViewWillEnter(){
     if (localStorage.getItem('perfil')==='chofer') {
       this.navCtrl.navigateRoot('home-chofer')
     }
@@ -49,9 +49,9 @@ export class HomePasajeroPage implements OnInit {
       zoom:16,
       collectResourceTiming: false,
     });
-  }
+  } */
 
-listar() {
+  listar() {
   this.crudViaje.listar().subscribe(data => {
     this.viajes = data.filter(viajes => !viajes.pasajeros?.includes(this.idPasajero) && !viajes.finalizado && viajes.numPasajeros<=viajes.contadorPasajeros);
       this.viajes.forEach((viaje) => {
@@ -65,7 +65,7 @@ listar() {
       console.error('Error al obtener los viajes:', error);
     }
   );
-}
+  }
 
 
 }

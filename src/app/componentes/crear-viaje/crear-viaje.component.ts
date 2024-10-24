@@ -29,10 +29,6 @@ export class CrearViajeComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    const direccion_guardada = localStorage.getItem("nombre_direccion");
-    if (direccion_guardada != null) {
-      this.viaje.destino = direccion_guardada;
-    }
   }
   
   valMonto()         { this.errMonto = this.viaje.valor !== null;}
@@ -65,8 +61,8 @@ export class CrearViajeComponent  implements OnInit {
     if (this.idChofer) {
       this.viaje.contadorPasajeros = this.viaje.numPasajeros;
       this.viaje.chofer = this.idChofer;
+      this.viaje.destino = this.destino;
       this.crudViaje.grabar(this.viaje).then(()=>{
-      localStorage.removeItem("nombre_direccion");
         Swal.fire({
           icon:'success',
           title: 'Viaje creado con éxito!',
