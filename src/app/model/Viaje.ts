@@ -8,8 +8,8 @@ export interface Viaje {
     hora_inicio: string   | null;
     punto_encuentro: string;
     valor: number | null;
-    numPasajeros: number | null;
-    contadorPasajeros: number | null;
+    numPasajeros: number;
+    contadorPasajeros: number;
     finalizado:boolean;
 
     latitud: number | null;
@@ -25,8 +25,8 @@ export function viajeVacio(): Viaje {
         hora_inicio: null,
         punto_encuentro: '',
         valor: null ,
-        numPasajeros: null,
-        contadorPasajeros: null,
+        numPasajeros: 0,
+        contadorPasajeros: 0,
         finalizado:false,
         latitud: null,
         longitud: null

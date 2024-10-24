@@ -53,8 +53,9 @@ export class HomePasajeroPage implements OnInit {
 
 listar() {
   this.crudViaje.listar().subscribe(data => {
-    this.viajes = data.filter(viajes => !viajes.pasajeros?.includes(this.idPasajero) && !viajes.finalizado);
+    this.viajes = data.filter(viajes => !viajes.pasajeros?.includes(this.idPasajero) && !viajes.finalizado && viajes.numPasajeros<=viajes.contadorPasajeros);
       this.viajes.forEach((viaje) => {
+
         this.crudChofer.getChofer(viaje.chofer).subscribe( dataChofer =>{
           viaje.chofer= dataChofer.nombre+' '+dataChofer.apellido
         })
