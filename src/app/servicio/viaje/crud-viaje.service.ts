@@ -35,13 +35,6 @@ export class CrudViajeService {
     return this.afs.collection('viaje').doc(idViaje).delete();
   }
 
-  /*   agregarAlViaje(id: string, idPasajero: string){
-    const viajeRef = this.afs.collection('viaje').doc(id);
-    viajeRef.update({
-      pasajeros : firebase.firestore.FieldValue.arrayUnion(idPasajero)
-      })
-      } */
-
   agregarAlViaje(id: string, idPasajero: string) {
     const viaje = this.afs.collection('viaje').doc(id);
 

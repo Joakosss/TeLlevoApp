@@ -1,4 +1,4 @@
-import { Component, Input, input, OnInit, output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {CrudViajeService} from 'src/app/servicio/viaje/crud-viaje.service'
 import Swal from 'sweetalert2';
 

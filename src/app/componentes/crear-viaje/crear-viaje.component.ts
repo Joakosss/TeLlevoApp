@@ -1,17 +1,19 @@
-
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { Viaje,viajeVacio } from 'src/app/model/Viaje';
+import { Component, Input, OnInit } from '@angular/core';
+import { IonicModule, NavController } from '@ionic/angular';
+import { viajeVacio } from 'src/app/model/Viaje';
 import { CrudViajeService } from 'src/app/servicio/viaje/crud-viaje.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-viaje',
-  templateUrl: './crear-viaje.page.html',
-  styleUrls: ['./crear-viaje.page.scss'],
+  templateUrl: './crear-viaje.component.html',
+  styleUrls: ['./crear-viaje.component.scss'],
 })
-export class CrearViajePage implements OnInit {
+export class CrearViajeComponent  implements OnInit {
   viaje = viajeVacio();
+
+  @Input() destino : string;
+
   errDestino        : boolean | null = null;
   errMonto          : boolean | null = null;
   errPuntoEncuentro : boolean | null = null;
@@ -22,29 +24,26 @@ export class CrearViajePage implements OnInit {
   
   direccion: string = '';
 
-  constructor(private crud:CrudViajeService,
+  constructor(private crudViaje:CrudViajeService,
               private navCtrl:NavController,
   ) { }
 
   ngOnInit() {
-    const direccion_guardada = localStorage.getItem("nombre_direccion");
-    if (direccion_guardada != null) {
-      this.viaje.destino = direccion_guardada;
-    }
   }
-  valDestino()       { this.errDestino = this.viaje.destino !== '';}
+  
   valMonto()         { this.errMonto = this.viaje.valor !== null;}
   valPuntoEncuentro(){ this.errPuntoEncuentro = this.viaje.punto_encuentro !== ''  ;}
   valNumPasajeros()  { this.errNumPasajeros = this.viaje.numPasajeros !== null;}
   valHoraInicio()    { this.errHoraInicio = this.viaje.hora_inicio !== null;}
   
   validador(){
-    this.valDestino()       
+      
     this.valMonto()         
     this.valPuntoEncuentro()
     this.valNumPasajeros()      
     this.valHoraInicio()    
-    if (this.errDestino && this.errMonto && this.errPuntoEncuentro && this.errNumPasajeros && this.errHoraInicio) {
+    if (this.errMonto && this.errPuntoEncuentro && this.errNumPasajeros && this.errHoraInicio) {
+      this.viaje.destino=this.destino;
       this.grabar();
     } else {
       Swal.fire({
@@ -62,15 +61,15 @@ export class CrearViajePage implements OnInit {
     if (this.idChofer) {
       this.viaje.contadorPasajeros = this.viaje.numPasajeros;
       this.viaje.chofer = this.idChofer;
-      this.crud.grabar(this.viaje).then(()=>{
-      localStorage.removeItem("nombre_direccion");
+      this.viaje.destino = this.destino;
+      this.crudViaje.grabar(this.viaje).then(()=>{
         Swal.fire({
           icon:'success',
           title: 'Viaje creado con éxito!',
           text: 'Esperemos el viaje c:',
           confirmButtonText: 'Aceptar',
           heightAuto: false
-        }).then(()=>this.navCtrl.navigateRoot('home-chofer'))
+        }).then(()=>this.navCtrl.navigateRoot('misviajes-chofer'))
         
       }).catch((err)=>{
         Swal.fire({
