@@ -1,7 +1,7 @@
 <!-- Este toolbar es para el perfil de pasajero -->
 
-<ion-footer class="comp-footer">
-    <div class="">
+<ion-footer class="comp-footer" *ngIf="!tecladoAbierto">
+    <div>
       <ion-toolbar class="toolbar">
         
         <ion-buttons slot="primary" class="custom-buttons">
@@ -33,9 +33,9 @@
           </ion-button>
 
           <!--Aqui deberia abrir la camara-->
-          <ion-button *ngIf="perfil === 'pasajero'" (click)="navPagina('/qr-pasajero')">
+          <!-- <ion-button *ngIf="perfil === 'pasajero'" (click)="navPagina('/qr-pasajero')">
             <ion-icon class="bx--qr"></ion-icon>
-          </ion-button>
+          </ion-button> -->
           
           <ion-button *ngIf="perfil === 'pasajero'" (click)="navPagina('/perfil-pasajero')">
             <ion-icon class="iconamoon--profile-fill"></ion-icon>
