@@ -1,0 +1,10 @@
+<article>
+  <div style="position:fixed ; right: 0.5rem; top: 0.5rem;">
+    <ion-button (click)="cerrar()" shape="round"
+      ><ion-icon slot="icon-only" name="close-outline"></ion-icon
+    ></ion-button>
+  </div>
+  <div style="text-align: center; margin-top: 1rem;">
+    <qr-code value="{{ valorQrTexto }}" size="400" errorCollectionLevel="M" />
+  </div>
+</article>

@@ -9,7 +9,8 @@ import { HeaderComponent } from '../header/header.component';
 import { ViajesComponent } from '../viajes/viajes.component';
 import { CrearViajeComponent } from '../crear-viaje/crear-viaje.component';
 import { FormsModule } from '@angular/forms';
-
+import { CrearQrComponent } from '../crear-qr/crear-qr.component';
+import { QrCodeModule } from 'ng-qrcode';
 
 // Declarar y exportar los componentes:
 @NgModule({
@@ -19,8 +20,10 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     ViajesComponent,
     CrearViajeComponent,
+    CrearQrComponent,
   ],
   imports: [
+    QrCodeModule,
     CommonModule,
     IonicModule,
     FormsModule,
@@ -30,6 +33,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     ViajesComponent,
     CrearViajeComponent,
+    CrearQrComponent,
   ]
 })
 export class ModuloModule { }
