@@ -76,7 +76,7 @@ export class HomeChoferPage implements OnInit {
 
   busqueda(event: any){
     const busqueda = event.target.value.toLowerCase();
-    console.log('Valor ingresado en el searchbar:', busqueda); 
+    /* console.log('Valor ingresado en el searchbar:', busqueda);  */
     
     if (busqueda && busqueda.length > 0){
       this.mapboxServicio
@@ -88,7 +88,7 @@ export class HomeChoferPage implements OnInit {
             lat: item.center[1]
           }));
             
-          console.log('Resultados de la búsqueda:', this.direcciones);
+          /* console.log('Resultados de la búsqueda:', this.direcciones); */
         });
     } else {
       this.direcciones = [];
@@ -122,7 +122,7 @@ export class HomeChoferPage implements OnInit {
     let nueva_ruta = this.geometria.replaceAll('LNG', lng).replaceAll('LAT', lat);
     this.geometria = nueva_ruta;
 
-    console.log('url nueva ruta: ', this.geometria);
+    /* console.log('url nueva ruta: ', this.geometria); */
 
     // Se agrega el marcador
     this.marcador(lng, lat);
