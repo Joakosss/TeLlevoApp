@@ -21,6 +21,17 @@
       </div>
     </article>
   </section>
+  <ion-list>
+    <ion-item *ngFor="let barcode of barcodes">
+      <ion-label position="stacked">{{ barcode.format }}</ion-label>
+      <ion-input type="text" [value]="barcode.rawValue"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="scan()" [disabled]="!isSupported">
+      <ion-icon name="scan"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <section *ngFor="let viaje of viajes">
     <article class="card"  *ngIf="viaje.finalizado">
       <div class="hijo">
@@ -37,7 +48,7 @@
         <p>Hora: <strong>{{viaje.hora_inicio}}</strong></p>
       </div>
       <div style="text-align: center;">
-        <ion-button [disabled]="viaje.finalizado" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
+        <ion-button (Click)="scan()" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
       </div>
     </article>
   </section>
