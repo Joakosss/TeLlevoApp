@@ -20,7 +20,7 @@
         <p>Hora: <strong>{{viaje.hora_inicio}}</strong></p>
       </div>
       <div style="text-align: center;">
-        <ion-button [disabled]="viaje.finalizado" routerLink="/qr-chofer.page.html" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="abrirModal(viaje.uid)" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
         <ion-button [disabled]="viaje.finalizado" (click)="finalizarViaje(viaje.uid)" color="primary">Finalizar<ion-icon name="hand-left-outline"></ion-icon></ion-button>
         <ion-button [disabled]="viaje.finalizado" (click)="eliminarViaje(viaje.uid)"color="primary">Eliminar<ion-icon name="trash-outline"></ion-icon></ion-button>
       </div>

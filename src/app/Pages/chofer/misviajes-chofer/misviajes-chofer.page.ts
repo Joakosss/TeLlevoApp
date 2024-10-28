@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { Pasajero } from 'src/app/model/Pasajero';
-import { Viaje } from 'src/app/model/Viaje';
+import { ModalController, NavController } from '@ionic/angular';
+import { CrearQrComponent } from 'src/app/componentes/crear-qr/crear-qr.component';
 import { CrudPasajeroService } from 'src/app/servicio/pasajero/crud-pasajero.service';
 import { CrudViajeService } from 'src/app/servicio/viaje/crud-viaje.service';
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-misviajes-chofer',
   templateUrl: './misviajes-chofer.page.html',
@@ -14,7 +14,7 @@ export class MisviajesChoferPage implements OnInit {
 
   constructor(private navCtrl: NavController,
               private crudViaje: CrudViajeService,
-              private crudPasajero: CrudPasajeroService,
+              private modal:ModalController,
   ) { }
 
   ngOnInit() {
@@ -98,7 +98,16 @@ export class MisviajesChoferPage implements OnInit {
     }
   }
 
-  /* AQUI VA LA FUNCION QUE LLAMA A LA CAMARA SEGUN EL VIAJE EJ:  CAMARAVIAJE(IDVIAJE:STRING){} */
+  async abrirModal(idViaje) {
+    const modal = await this.modal.create({
+      component: CrearQrComponent,
+      componentProps: {
+        idViaje: idViaje // Aquí pasamos el parámetro idViaje al modal
+      },
+      backdropDismiss: true, // Permite cerrar el modal al tocar fuera de él
+    });
+    return await modal.present();
+  }
 
 
 }
