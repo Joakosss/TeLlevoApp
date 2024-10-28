@@ -28,9 +28,9 @@
     </ion-item>
   </ion-list>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="scan()" [disabled]="!isSupported">
+<!--     <ion-fab-button (click)="scan()" [disabled]="!isSupported">
       <ion-icon name="scan"></ion-icon>
-    </ion-fab-button>
+    </ion-fab-button> -->
   </ion-fab>
   <section *ngFor="let viaje of viajes">
     <article class="card"  *ngIf="viaje.finalizado">
