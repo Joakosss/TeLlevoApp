@@ -12,6 +12,7 @@ import { AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { AngularFireModule} from '@angular/fire/compat';
 import { QrCodeModule } from 'ng-qrcode';
 
+import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 // importar para el mapa
 import { HttpClientModule } from '@angular/common/http';
 
@@ -22,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 	  AngularFirestoreModule,
     HttpClientModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync()],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },  provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

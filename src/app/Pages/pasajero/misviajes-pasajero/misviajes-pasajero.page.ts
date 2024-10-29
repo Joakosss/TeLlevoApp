@@ -5,8 +5,9 @@ import { CrudChoferService } from 'src/app/servicio/chofer/crud-chofer.service';
 import { CrudViajeService } from 'src/app/servicio/viaje/crud-viaje.service';
 import Swal from 'sweetalert2';
  
-import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { Barcode, BarcodeFormat, BarcodeScanner, LensFacing } from '@capacitor-mlkit/barcode-scanning';
 import { AlertController } from '@ionic/angular';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-misviajes-pasajero',
@@ -17,12 +18,21 @@ export class MisviajesPasajeroPage implements OnInit {
 
   isSupported = false;
   barcodes: Barcode[] = [];
+  public readonly barcodeFormat = BarcodeFormat;
+  public readonly lensFacing = LensFacing;
+
+  public formGroup = new UntypedFormGroup({
+    formats: new UntypedFormControl([]),
+    lensFacing: new UntypedFormControl(LensFacing.Back),
+    googleBarcodeScannerModuleInstallState: new UntypedFormControl(0),
+    googleBarcodeScannerModuleInstallProgress: new UntypedFormControl(0),
+  });
 
   constructor(private menu: MenuController,
               private navCtrl: NavController,
               private crudViaje: CrudViajeService,
               private crudChofer: CrudChoferService,
-              private alertController: AlertController
+              private alertController: AlertController,
   ) { }
 
   ngOnInit() {
@@ -71,7 +81,6 @@ export class MisviajesPasajeroPage implements OnInit {
   }
 
   async scan(): Promise<void> {
-    alert("btn qr");
     const granted = await this.requestPermissions();
     if (!granted) {
       this.presentAlert();
@@ -104,4 +113,15 @@ export class MisviajesPasajeroPage implements OnInit {
     alert("Test Alert!");
   }
 
+  async scanGoogle(): Promise<void> {
+    const formats = this.formGroup.get('formats')?.value || [];
+    const { barcodes } = await BarcodeScanner.scan({
+      formats,
+    });
+    this.barcodes = barcodes;
+  }
+
+  public async installGoogleBarcodeScannerModule(): Promise<void> {
+    await BarcodeScanner.installGoogleBarcodeScannerModule();
+  }
 }
