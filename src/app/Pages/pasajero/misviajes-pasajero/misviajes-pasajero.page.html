@@ -20,7 +20,7 @@
         <p>Hora: <strong>{{viaje.hora_inicio}}</strong></p>
       </div>
       <div style="text-align: center;">
-        <ion-button [disabled]="viaje.finalizado" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="scan()"  color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
       </div>
     </article>
   </section>
@@ -51,7 +51,7 @@
         <p>Hora: <strong>{{viaje.hora_inicio}}</strong></p>
       </div>
       <div style="text-align: center;">
-        <ion-button (click)="scan()" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (Click)="scan()" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
       </div>
 
     </article>
