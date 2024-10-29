@@ -64,6 +64,8 @@ export class CrearViajeComponent  implements OnInit {
       this.viaje.contadorPasajeros = this.viaje.numPasajeros;
       this.viaje.chofer = this.idChofer;
       this.viaje.destino = this.destino;
+      this.viaje.latitud = this.latitud;
+      this.viaje.longitud = this.logintud;
       this.crudViaje.grabar(this.viaje).then(()=>{
         Swal.fire({
           icon:'success',

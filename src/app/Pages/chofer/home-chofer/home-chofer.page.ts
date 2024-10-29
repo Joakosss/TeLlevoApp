@@ -176,7 +176,6 @@ export class HomeChoferPage implements OnInit {
   generar_ruta(){
     this.http.get(this.geometria).subscribe((data:any)=>{
       console.log(data.routes[0].geometry);
-
       this.map.addSource('route',{
         type:'geojson',
         data:{
