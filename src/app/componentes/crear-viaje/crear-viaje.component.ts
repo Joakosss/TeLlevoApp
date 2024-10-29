@@ -13,6 +13,8 @@ export class CrearViajeComponent  implements OnInit {
   viaje = viajeVacio();
 
   @Input() destino : string;
+  @Input() latitud : string;
+  @Input() logintud : string;
 
   errDestino        : boolean | null = null;
   errMonto          : boolean | null = null;
