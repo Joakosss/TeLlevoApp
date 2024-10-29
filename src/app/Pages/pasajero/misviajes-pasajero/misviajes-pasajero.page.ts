@@ -71,13 +71,19 @@ export class MisviajesPasajeroPage implements OnInit {
   }
 
   async scan(): Promise<void> {
+    alert("btn qr");
     const granted = await this.requestPermissions();
     if (!granted) {
       this.presentAlert();
       return;
+    } 
+    try {
+      const { barcodes } = await BarcodeScanner.scan();
+      this.barcodes.push(...barcodes);
+    } catch (error) {
+      console.error(error);
     }
-    const { barcodes } = await BarcodeScanner.scan();
-    this.barcodes.push(...barcodes);
+
   }
 
   async requestPermissions(): Promise<boolean> {
@@ -94,6 +100,8 @@ export class MisviajesPasajeroPage implements OnInit {
     await alert.present();
   }
 
-
+  test() {
+    alert("Test Alert!");
+  }
 
 }

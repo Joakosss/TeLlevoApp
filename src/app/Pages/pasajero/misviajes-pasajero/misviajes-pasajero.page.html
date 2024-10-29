@@ -2,6 +2,9 @@
 
 <ion-content [fullscreen]="true">
   <app-header></app-header>
+  <div>
+    <ion-button (click)="scan()">xd</ion-button>
+  </div>
   <section *ngFor="let viaje of viajes">
     <article class="card"  *ngIf="!viaje.finalizado">
       <div class="hijo">
@@ -48,8 +51,9 @@
         <p>Hora: <strong>{{viaje.hora_inicio}}</strong></p>
       </div>
       <div style="text-align: center;">
-        <ion-button (Click)="scan()" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
+        <ion-button (click)="scan()" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
       </div>
+
     </article>
   </section>
   <div *ngIf="cargandoFlag" class="spinner">
