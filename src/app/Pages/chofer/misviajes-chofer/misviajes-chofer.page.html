@@ -24,6 +24,7 @@
         <ion-button [disabled]="viaje.finalizado" (click)="abrirModal(viaje.uid)" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
         <ion-button [disabled]="viaje.finalizado" (click)="finalizarViaje(viaje.uid)" color="primary">Finalizar<ion-icon name="hand-left-outline"></ion-icon></ion-button>
         <ion-button [disabled]="viaje.finalizado" (click)="eliminarViaje(viaje.uid)"color="primary">Eliminar<ion-icon name="trash-outline"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="abrirMapa(viaje.latitud, viaje.longitud)" color="primary">Mapa<ion-icon name="map-outline"></ion-icon></ion-button>
       </div>
     </article>
   </section>
@@ -48,6 +49,7 @@
         <ion-button [disabled]="viaje.finalizado" color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
         <ion-button [disabled]="viaje.finalizado" (click)="finalizarViaje(viaje.uid)" color="primary">Finalizar<ion-icon name="hand-left-outline"></ion-icon></ion-button>
         <ion-button [disabled]="viaje.finalizado" (click)="eliminarViaje(viaje.uid)"color="primary">Eliminar<ion-icon name="trash-outline"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="abrirMapa(viaje.latitud, viaje.longitud)" color="primary">Mapa<ion-icon name="map-outline"></ion-icon></ion-button>
       </div>
     </article>
   </section>

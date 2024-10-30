@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { CrearQrComponent } from 'src/app/componentes/crear-qr/crear-qr.component';
+import { MapaComponent } from 'src/app/componentes/mapa/mapa.component';
 import { CrudPasajeroService } from 'src/app/servicio/pasajero/crud-pasajero.service';
 import { CrudViajeService } from 'src/app/servicio/viaje/crud-viaje.service';
 import Swal from 'sweetalert2';
@@ -107,6 +108,16 @@ export class MisviajesChoferPage implements OnInit {
     });
     return await modal.present();
   }
-
+  async abrirMapa(latitud,longitud) {
+    const modal = await this.modal.create({
+      component: MapaComponent,
+      componentProps: {
+        latitud: latitud, // Aquí pasamos el parámetro idViaje al modal,
+        longitud:longitud,
+      },
+      backdropDismiss: true, // Permite cerrar el modal al tocar fuera de él
+    });
+    return await modal.present();
+  }
 
 }

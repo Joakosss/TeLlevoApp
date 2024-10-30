@@ -58,8 +58,6 @@ export class MapaComponent  implements OnInit {
     let nueva_ruta = this.geometria.replaceAll('LNG', this.longitud).replaceAll('LAT', this.latitud);
     this.geometria = nueva_ruta;
 
-    console.log('url nueva ruta: ', this.geometria);
-
     // Se agrega el marcador
     this.marcador(lng, lat);
     // Nueva ruta

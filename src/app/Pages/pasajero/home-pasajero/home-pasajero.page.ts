@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
+import { MapaComponent } from 'src/app/componentes/mapa/mapa.component';
 import { Viaje } from 'src/app/model/Viaje';
 import { CrudChoferService } from 'src/app/servicio/chofer/crud-chofer.service';
 import {CrudViajeService} from 'src/app/servicio/viaje/crud-viaje.service'
-//Importaciones para el mapa 
-import * as mapboxgl from 'mapbox-gl';
-import { environment } from 'src/environments/environment';
+
 
 
 @Component({
@@ -66,6 +65,8 @@ export class HomePasajeroPage implements OnInit {
     }
   );
   }
+
+
 
 
 }

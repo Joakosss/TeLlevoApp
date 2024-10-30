@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { Viaje } from 'src/app/model/Viaje';
 import {CrudViajeService} from 'src/app/servicio/viaje/crud-viaje.service'
 import Swal from 'sweetalert2';
+import { MapaComponent } from '../mapa/mapa.component';
 
 @Component({
   selector: 'app-viajes',
@@ -8,22 +11,19 @@ import Swal from 'sweetalert2';
   styleUrls: ['./viajes.component.scss'],
 })
 export class ViajesComponent  implements OnInit {
-
-  @Input() destino:string = '';
-  @Input() hora:string = '';
-  @Input() fecha:string = '';
-  @Input() monto:string = '';
+  @Input() viaje: Viaje;
   @Input() chofer:string = '';
-  @Input() idViaje:string = '';
   @Input() idUsuario:string|null= '';
   
-  constructor(private crudViaje:CrudViajeService) { }
+  constructor(private crudViaje:CrudViajeService,
+              private modal:ModalController,
+  ) { }
 
   ngOnInit() {}
 
   async soliViaje(){
     try {
-      const aux = await this.crudViaje.agregarAlViaje(this.idViaje,this.idUsuario||'')
+      const aux = await this.crudViaje.agregarAlViaje(this.viaje.uid||'', this.idUsuario||'')
       Swal.fire({
         icon: 'success',
         title: 'Viaje solicitado con éxito!',
@@ -40,5 +40,15 @@ export class ViajesComponent  implements OnInit {
       });
     }
   }
-
+  async abrirMapa(latitud,longitud) {
+    const modal = await this.modal.create({
+      component: MapaComponent,
+      componentProps: {
+        latitud: latitud, // Aquí pasamos el parámetro idViaje al modal,
+        longitud:longitud,
+      },
+      backdropDismiss: true, // Permite cerrar el modal al tocar fuera de él
+    });
+    return await modal.present();
+  }
 }
