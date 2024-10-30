@@ -2,6 +2,7 @@
 
 <ion-content [fullscreen]="true">
   <app-header></app-header>
+  <h1 *ngIf="viajes.length==0" class="center">No tienes viajes :C</h1>  
   <section *ngFor="let viaje of viajes">
     <article class="card"  *ngIf="!viaje.finalizado">
       <div class="hijo">
