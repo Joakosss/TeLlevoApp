@@ -2,7 +2,6 @@
 
 <ion-content [fullscreen]="true">
   <app-header></app-header> 
-  <ion-button (click)="scanGoogle()">El otro QR</ion-button>
   <section *ngFor="let viaje of viajes">
     <article class="card"  *ngIf="!viaje.finalizado">
       <div class="hijo">
