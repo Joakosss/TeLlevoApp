@@ -12,8 +12,8 @@ export interface Viaje {
     contadorPasajeros: number;
     finalizado: boolean;
     fecha: string; // Cambiar a string para almacenar la fecha formateada
-    latitud: number | null;
-    longitud: number | null;
+    latitud: string | null;
+    longitud: string | null;
 }
 
 export function viajeVacio(): Viaje {
