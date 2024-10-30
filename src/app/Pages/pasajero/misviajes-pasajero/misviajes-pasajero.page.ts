@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, NavController } from '@ionic/angular';
+import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { CrudChoferService } from 'src/app/servicio/chofer/crud-chofer.service';
 
 import { CrudViajeService } from 'src/app/servicio/viaje/crud-viaje.service';
@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
  
 import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 import { AlertController } from '@ionic/angular';
+import { MapaComponent } from 'src/app/componentes/mapa/mapa.component';
 
 @Component({
   selector: 'app-misviajes-pasajero',
@@ -22,7 +23,8 @@ export class MisviajesPasajeroPage implements OnInit {
               private navCtrl: NavController,
               private crudViaje: CrudViajeService,
               private crudChofer: CrudChoferService,
-              private alertController: AlertController
+              private alertController: AlertController,
+              private modal:ModalController,
   ) { }
 
   ngOnInit() {
@@ -95,6 +97,18 @@ export class MisviajesPasajeroPage implements OnInit {
     await alert.present();
   }
 
+
+  async abrirMapa(latitud,longitud) {
+    const modal = await this.modal.create({
+      component: MapaComponent,
+      componentProps: {
+        latitud: latitud, // Aquí pasamos el parámetro idViaje al modal,
+        longitud:longitud,
+      },
+      backdropDismiss: true, // Permite cerrar el modal al tocar fuera de él
+    });
+    return await modal.present();
+  }
 
 
 }
