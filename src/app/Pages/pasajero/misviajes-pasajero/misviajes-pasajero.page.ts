@@ -20,6 +20,7 @@ export class MisviajesPasajeroPage implements OnInit {
   barcodes: Barcode[] = [];
   public readonly barcodeFormat = BarcodeFormat;
   public readonly lensFacing = LensFacing;
+  public isPermissionGranted = false;
 
   public formGroup = new UntypedFormGroup({
     formats: new UntypedFormControl([]),
@@ -35,7 +36,13 @@ export class MisviajesPasajeroPage implements OnInit {
               private alertController: AlertController,
   ) { }
 
-  ngOnInit() {
+  ngOnInit():void {
+    BarcodeScanner.isSupported().then((result) => {
+      this.isSupported = result.supported;
+    });
+    BarcodeScanner.checkPermissions().then((result) => {
+      this.isPermissionGranted = result.camera === 'granted';
+    });
     this.menu.enable(true);
     if (localStorage.getItem('perfil')==='chofer') {
       this.navCtrl.navigateRoot('misviajes-chofer')
@@ -48,10 +55,6 @@ export class MisviajesPasajeroPage implements OnInit {
     if (localStorage.getItem('perfil')==='chofer') {
       this.navCtrl.navigateRoot('qr-chofer')
     }
-
-    BarcodeScanner.isSupported().then((result) => {
-      this.isSupported = result.supported;
-    });
 
   }
 
@@ -109,11 +112,7 @@ export class MisviajesPasajeroPage implements OnInit {
     await alert.present();
   }
 
-  test() {
-    alert("Test Alert!");
-  }
-
-  async scanGoogle(): Promise<void> {
+  public async scanGoogle(): Promise<void> {
     const formats = this.formGroup.get('formats')?.value || [];
     const { barcodes } = await BarcodeScanner.scan({
       formats,
@@ -124,4 +123,5 @@ export class MisviajesPasajeroPage implements OnInit {
   public async installGoogleBarcodeScannerModule(): Promise<void> {
     await BarcodeScanner.installGoogleBarcodeScannerModule();
   }
+
 }
