@@ -1,8 +1,12 @@
 <app-menu></app-menu>
-
 <ion-content [fullscreen]="true">
   <app-header></app-header>
-  <h1 *ngIf="viajes.length==0" class="center">No tienes viajes :C</h1>  
+  <ion-button
+          expand="block"
+          (click)="startScan()"
+          [disabled]="!isSupported"
+          >Start Scan</ion-button>
+  <h1 *ngIf="viajes.length==0" class="center" style="text-align: center;">No tienes viajes :C</h1>  
   <section *ngFor="let viaje of viajes">
     <article class="card"  *ngIf="!viaje.finalizado">
       <div class="hijo">
@@ -18,9 +22,51 @@
         <p>Hora: <strong>{{viaje.hora_inicio}}</strong></p>
       </div>
       <div style="text-align: center;">
-        <ion-button [disabled]="viaje.finalizado" (click)="scan()"  color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="startScan()"  color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
       </div>
     </article>
+    @for (barcode of barcodes; track barcode) {
+      <ion-card>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="fixed">Bytes</ion-label>
+            <ion-input
+              type="text"
+              readonly
+              [value]="barcode.bytes?.toString() || ''"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Corner Points</ion-label>
+            <ion-input
+              type="text"
+              readonly
+              [value]="barcode.cornerPoints?.toString() || ''"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Display Value</ion-label>
+            <ion-input
+              type="text"
+              readonly
+              [value]="barcode.displayValue"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Format</ion-label>
+            <ion-input type="text" readonly [value]="barcode.format"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Raw Value</ion-label>
+            <ion-input type="text" readonly [value]="barcode.rawValue"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="fixed">Value Type</ion-label>
+            <ion-input type="text" readonly [value]="barcode.valueType"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      }
   </section>
   <ion-list>
     <ion-item *ngFor="let barcode of barcodes">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
 import { CrudChoferService } from 'src/app/servicio/chofer/crud-chofer.service';
 
@@ -6,6 +6,8 @@ import { CrudViajeService } from 'src/app/servicio/viaje/crud-viaje.service';
 import Swal from 'sweetalert2';
  
 import { Barcode, BarcodeFormat, BarcodeScanner, LensFacing } from '@capacitor-mlkit/barcode-scanning';
+import { BarcodeScanningModalComponent } from './misviajes-pasajero.component';
+import { DialogService } from 'src/app/servicio/dialog/dialog.service';
 import { AlertController } from '@ionic/angular';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
@@ -34,6 +36,8 @@ export class MisviajesPasajeroPage implements OnInit {
               private crudViaje: CrudViajeService,
               private crudChofer: CrudChoferService,
               private alertController: AlertController,
+              private readonly dialogService: DialogService,
+              private readonly ngZone: NgZone
   ) { }
 
   ngOnInit():void {
@@ -56,7 +60,21 @@ export class MisviajesPasajeroPage implements OnInit {
     if (localStorage.getItem('perfil')==='chofer') {
       this.navCtrl.navigateRoot('qr-chofer')
     }
-
+    BarcodeScanner.removeAllListeners().then(() => {
+      BarcodeScanner.addListener(
+        'googleBarcodeScannerModuleInstallProgress',
+        (event) => {
+          this.ngZone.run(() => {
+            console.log('googleBarcodeScannerModuleInstallProgress', event);
+            const { state, progress } = event;
+            this.formGroup.patchValue({
+              googleBarcodeScannerModuleInstallState: state,
+              googleBarcodeScannerModuleInstallProgress: progress,
+            });
+          });
+        },
+      );
+    });
   }
 
   viajes : any = [];
@@ -84,36 +102,29 @@ export class MisviajesPasajeroPage implements OnInit {
     }
   }
 
-  async scan(): Promise<void> {
-    const granted = await this.requestPermissions();
-    if (!granted) {
-      this.presentAlert();
-      return;
-    } 
-    try {
-      const { barcodes } = await BarcodeScanner.scan();
-      this.barcodes.push(...barcodes);
-    } catch (error) {
-      console.error(error);
-    }
-
-  }
-
-  async requestPermissions(): Promise<boolean> {
-    const { camera } = await BarcodeScanner.requestPermissions();
-    return camera === 'granted' || camera === 'limited';
-  }
-
-  async presentAlert(): Promise<void> {
-    const alert = await this.alertController.create({
-      header: 'Permission denied',
-      message: 'Please grant camera permission to use the barcode scanner.',
-      buttons: ['OK'],
+  public async startScan(): Promise<void> {
+    const formats = this.formGroup.get('formats')?.value || [];
+    const lensFacing =
+      this.formGroup.get('lensFacing')?.value || LensFacing.Back;
+    const element = await this.dialogService.showModal({
+      component: BarcodeScanningModalComponent,
+      // Set `visibility` to `visible` to show the modal (see `src/theme/variables.scss`)
+      cssClass: 'barcode-scanning-modal',
+      showBackdrop: false,
+      componentProps: {
+        formats: formats,
+        lensFacing: lensFacing,
+      },
     });
-    await alert.present();
-  }
+    element.onDidDismiss().then((result) => {
+      const barcode: Barcode | undefined = result.data?.barcode;
+      if (barcode) {
+        this.barcodes = [barcode];
+      }
+    });
+  }  
 
-  public async scanGoogle(): Promise<void> {
+  public async scan(): Promise<void> {
     const formats = this.formGroup.get('formats')?.value || [];
     const { barcodes } = await BarcodeScanner.scan({
       formats,
@@ -121,8 +132,27 @@ export class MisviajesPasajeroPage implements OnInit {
     this.barcodes = barcodes;
   }
 
+  public async openSettings(): Promise<void> {
+    await BarcodeScanner.openSettings();
+  }
+
   public async installGoogleBarcodeScannerModule(): Promise<void> {
     await BarcodeScanner.installGoogleBarcodeScannerModule();
   }
 
+  public async requestPermissions(): Promise<void> {
+    await BarcodeScanner.requestPermissions();
+  }
+
+/*   async presentAlert(): Promise<void> {
+    const alert = await this.alertController.create({
+      header: 'Permission denied',
+      message: 'Please grant camera permission to use the barcode scanner.',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+ */
+
+  
 }
