@@ -22,9 +22,9 @@ export class MisviajesChoferPage implements OnInit {
       this.navCtrl.navigateRoot('misviajes-pasajero')
     }
     this.cargandoFlag=true;
-    this.listar()
-    setTimeout(()=>this.cargandoFlag=false,1000)
-    
+    this.listar().then(() => {
+      setTimeout(() => this.cargandoFlag = false, 1000);
+    });
   }
   
   viajes : any = [];
@@ -34,7 +34,6 @@ export class MisviajesChoferPage implements OnInit {
     try {
       await this.crudViaje.listarViajesChofer(localStorage.getItem('idUsuario') || '').subscribe(data => {
         this.viajes = data;
-        console.log(this.viajes);
       });
     } catch (error) {
       Swal.fire({

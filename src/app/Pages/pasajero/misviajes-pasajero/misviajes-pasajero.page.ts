@@ -49,8 +49,9 @@ export class MisviajesPasajeroPage implements OnInit {
     }
 
     this.cargandoFlag=true;
-    this.listar()
-    setTimeout(()=>this.cargandoFlag=false,1000)
+    this.listar().then(() => {
+      setTimeout(() => this.cargandoFlag = false, 1000);
+    });
 
     if (localStorage.getItem('perfil')==='chofer') {
       this.navCtrl.navigateRoot('qr-chofer')

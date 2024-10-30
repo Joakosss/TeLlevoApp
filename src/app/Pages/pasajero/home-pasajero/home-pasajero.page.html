@@ -1,9 +1,10 @@
 <app-menu></app-menu>
 
 <ion-content  [fullscreen]="true">
-  <app-header></app-header> 
+  <app-header></app-header>
+  <h1 *ngIf="viajes.length==0" class="center">No hay viajes disponibles :C</h1>  
   <section *ngFor="let viaje of viajes ">
-     <app-viajes [destino]="viaje.destino" [hora]="viaje.hora_inicio ?? 'Hora no disponible'" [fecha]="'S/F'" [monto]="(viaje.valor ?? 0).toString()" [chofer]="viaje.chofer" [idViaje]="viaje.uid ?? '0'" [idUsuario]="idPasajero"></app-viajes>
+     <app-viajes [destino]="viaje.destino" [hora]="viaje.hora_inicio ?? 'Hora no disponible'" [fecha]="viaje.fecha" [monto]="(viaje.valor ?? 0).toString()" [chofer]="viaje.chofer" [idViaje]="viaje.uid ?? '0'" [idUsuario]="idPasajero"></app-viajes>
   </section>
 </ion-content>
 
