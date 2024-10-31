@@ -121,12 +121,18 @@ const routes: Routes = [
       ),
       canActivate: [activadoGuard]
   },
+  {
+    path: 'lector-qr',
+    loadChildren: () => import('./Pages/pasajero/lector-qr/lector-qr.module').then( m => m.LectorQrPageModule)
+  },
   /* La página de error siempre debe quedar al final para que no genere conflictos */
   {
     path: '**',
     loadChildren: () =>
       import('./Pages/p404/p404.module').then((m) => m.P404PageModule),
   },
+
+
 ];
 
 @NgModule({

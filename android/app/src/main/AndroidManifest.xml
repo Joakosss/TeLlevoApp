@@ -30,14 +30,14 @@
             android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
-          <meta-data
-            android:name="android.support.FILE_PROVIDER_PATHS"
-            android:resource="@xml/file_paths"></meta-data>
+            <meta-data
+              android:name="android.support.FILE_PROVIDER_PATHS"
+              android:resource="@xml/file_paths"></meta-data>
         </provider>
 
-      <meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="barcode_ui"/>
-
-      <meta-data android:name="google_analytics_automatic_screen_reporting_enabled" android:value="false" />
+        <!-- Disable screenview tracking -->
+        <meta-data android:name="google_analytics_automatic_screen_reporting_enabled" android:value="false" />
+        <meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="barcode_ui"/>
 
     <!-- To use multiple models: android:value="face,model2,model3" -->
     </application>
@@ -51,6 +51,4 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- To get access to the flashlight. -->
     <uses-permission android:name="android.permission.FLASHLIGHT"/>
-
-
 </manifest>

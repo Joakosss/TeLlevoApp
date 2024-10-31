@@ -6,6 +6,7 @@
           (click)="startScan()"
           [disabled]="!isSupported"
           >Start Scan</ion-button>
+  <ion-button (click)="navPagina('/lector-qr')">Ir al lector</ion-button>
   <h1 *ngIf="viajes.length==0" class="center" style="text-align: center;">No tienes viajes :C</h1>  
   <section *ngFor="let viaje of viajes">
     <article class="card"  *ngIf="!viaje.finalizado">

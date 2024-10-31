@@ -11,6 +11,7 @@ import { CrearViajeComponent } from '../crear-viaje/crear-viaje.component';
 import { FormsModule } from '@angular/forms';
 import { CrearQrComponent } from '../crear-qr/crear-qr.component';
 import { QrCodeModule } from 'ng-qrcode';
+import { BarcodeScanningModalComponent } from '../escaner-qr/barcode-scanning-modal.component';
 
 // Declarar y exportar los componentes:
 @NgModule({
@@ -21,6 +22,7 @@ import { QrCodeModule } from 'ng-qrcode';
     ViajesComponent,
     CrearViajeComponent,
     CrearQrComponent,
+    BarcodeScanningModalComponent
   ],
   imports: [
     QrCodeModule,
@@ -34,6 +36,7 @@ import { QrCodeModule } from 'ng-qrcode';
     ViajesComponent,
     CrearViajeComponent,
     CrearQrComponent,
+    BarcodeScanningModalComponent
   ]
 })
 export class ModuloModule { }

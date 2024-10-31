@@ -6,7 +6,7 @@ import { CrudViajeService } from 'src/app/servicio/viaje/crud-viaje.service';
 import Swal from 'sweetalert2';
  
 import { Barcode, BarcodeFormat, BarcodeScanner, LensFacing } from '@capacitor-mlkit/barcode-scanning';
-import { BarcodeScanningModalComponent } from './misviajes-pasajero.component';
+import { BarcodeScanningModalComponent } from 'src/app/componentes/escaner-qr/barcode-scanning-modal.component';
 import { DialogService } from 'src/app/servicio/dialog/dialog.service';
 import { AlertController } from '@ionic/angular';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
@@ -57,9 +57,6 @@ export class MisviajesPasajeroPage implements OnInit {
       setTimeout(() => this.cargandoFlag = false, 1000);
     });
 
-    if (localStorage.getItem('perfil')==='chofer') {
-      this.navCtrl.navigateRoot('qr-chofer')
-    }
     BarcodeScanner.removeAllListeners().then(() => {
       BarcodeScanner.addListener(
         'googleBarcodeScannerModuleInstallProgress',
@@ -106,6 +103,7 @@ export class MisviajesPasajeroPage implements OnInit {
     const formats = this.formGroup.get('formats')?.value || [];
     const lensFacing =
       this.formGroup.get('lensFacing')?.value || LensFacing.Back;
+
     const element = await this.dialogService.showModal({
       component: BarcodeScanningModalComponent,
       // Set `visibility` to `visible` to show the modal (see `src/theme/variables.scss`)
@@ -116,6 +114,7 @@ export class MisviajesPasajeroPage implements OnInit {
         lensFacing: lensFacing,
       },
     });
+
     element.onDidDismiss().then((result) => {
       const barcode: Barcode | undefined = result.data?.barcode;
       if (barcode) {
@@ -137,14 +136,19 @@ export class MisviajesPasajeroPage implements OnInit {
   }
 
   public async installGoogleBarcodeScannerModule(): Promise<void> {
-    await BarcodeScanner.installGoogleBarcodeScannerModule();
+    const result = await BarcodeScanner.requestPermissions();
+    if (result.camera !== 'granted') {
+        await this.presentAlert();
+    } else {
+        this.isPermissionGranted = true; // Actualiza el estado del permiso
+    }
   }
 
   public async requestPermissions(): Promise<void> {
     await BarcodeScanner.requestPermissions();
   }
 
-/*   async presentAlert(): Promise<void> {
+ async presentAlert(): Promise<void> {
     const alert = await this.alertController.create({
       header: 'Permission denied',
       message: 'Please grant camera permission to use the barcode scanner.',
@@ -152,7 +156,9 @@ export class MisviajesPasajeroPage implements OnInit {
     });
     await alert.present();
   }
- */
 
+navPagina(page:string) {
+  this.navCtrl.navigateForward(page);
+}
   
 }

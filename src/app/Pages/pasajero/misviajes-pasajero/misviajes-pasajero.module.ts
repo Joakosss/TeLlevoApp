@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MisviajesPasajeroPageRoutingModule } from './misviajes-pasajero-routing.module';
 
 import { MisviajesPasajeroPage } from './misviajes-pasajero.page';
-import { BarcodeScanningModalComponent } from './misviajes-pasajero.component';
+import { BarcodeScanningModalComponent } from 'src/app/componentes/escaner-qr/barcode-scanning-modal.component';
 
 import { ModuloModule } from 'src/app/componentes/modulo/modulo.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -19,8 +19,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     IonicModule,
     MisviajesPasajeroPageRoutingModule,
     ModuloModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
-  declarations: [MisviajesPasajeroPage, BarcodeScanningModalComponent]
+  declarations: [MisviajesPasajeroPage]
 })
 export class MisviajesPasajeroPageModule {}
