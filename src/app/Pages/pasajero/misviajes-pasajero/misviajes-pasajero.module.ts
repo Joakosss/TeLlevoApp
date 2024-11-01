@@ -10,6 +10,8 @@ import { MisviajesPasajeroPage } from './misviajes-pasajero.page';
 
 import { ModuloModule } from 'src/app/componentes/modulo/modulo.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+// Se exporta el componente del escaner 
+import { BarcodeScanningModalComponent } from './barcode-scanning-modal.component';
 
 @NgModule({
   imports: [
@@ -20,6 +22,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ModuloModule,
     MatProgressSpinnerModule
   ],
-  declarations: [MisviajesPasajeroPage]
+  declarations: [MisviajesPasajeroPage, BarcodeScanningModalComponent]
 })
 export class MisviajesPasajeroPageModule {}

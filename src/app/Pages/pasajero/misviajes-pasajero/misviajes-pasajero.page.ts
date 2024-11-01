@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, ModalController, NavController } from '@ionic/angular';
+import { IonModal, MenuController, ModalController, NavController, Platform } from '@ionic/angular';
 import { CrudChoferService } from 'src/app/servicio/chofer/crud-chofer.service';
 
 import { CrudViajeService } from 'src/app/servicio/viaje/crud-viaje.service';
 import Swal from 'sweetalert2';
  
-import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { Barcode, BarcodeScanner, LensFacing } from '@capacitor-mlkit/barcode-scanning';
 import { AlertController } from '@ionic/angular';
 import { MapaComponent } from 'src/app/componentes/mapa/mapa.component';
+import { BarcodeScanningModalComponent } from './barcode-scanning-modal.component';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-misviajes-pasajero',
@@ -18,16 +20,35 @@ export class MisviajesPasajeroPage implements OnInit {
 
   isSupported = false;
   barcodes: Barcode[] = [];
+  scanResult = '';
+  viajes : any = [];
+  cargandoFlag = false;
+  idUsuario = localStorage.getItem('idUsuario')||'';
+  public formGroup = new UntypedFormGroup({
+    formats: new UntypedFormControl([]),
+    lensFacing: new UntypedFormControl(LensFacing.Back),
+    googleBarcodeScannerModuleInstallState: new UntypedFormControl(0),
+    googleBarcodeScannerModuleInstallProgress: new UntypedFormControl(0),
+  });
 
   constructor(private menu: MenuController,
               private navCtrl: NavController,
               private crudViaje: CrudViajeService,
               private crudChofer: CrudChoferService,
               private alertController: AlertController,
-              private modal:ModalController,
+              private modal: ModalController,
+              private platform: Platform
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    if(this.platform.is('capacitor')){
+      // condición barcode scanner es soportado por dispositivo
+      BarcodeScanner.isSupported().then();
+      // Si lo soporta pide permisos para utilizar camara
+      BarcodeScanner.checkPermissions().then();
+      BarcodeScanner.removeAllListeners();
+    }
+
     this.menu.enable(true);
     if (localStorage.getItem('perfil')==='chofer') {
       this.navCtrl.navigateRoot('misviajes-chofer')
@@ -41,16 +62,29 @@ export class MisviajesPasajeroPage implements OnInit {
     if (localStorage.getItem('perfil')==='chofer') {
       this.navCtrl.navigateRoot('qr-chofer')
     }
-
-    BarcodeScanner.isSupported().then((result) => {
-      this.isSupported = result.supported;
-    });
-
   }
 
-  viajes : any = [];
-  cargandoFlag = false;
-  idUsuario = localStorage.getItem('idUsuario')||'';
+  /* Función para abrir escaner QR */
+  async startScan(){
+    const modal = await this.modal.create({
+    component: BarcodeScanningModalComponent,
+    cssClass: 'barcode-scanning-modal',
+    showBackdrop: false,
+    componentProps: {
+      formats: [],
+      lensFacing: LensFacing.Back
+    }
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    // Si hay datos en la lectura muestra el valor
+    if(data){
+      this.scanResult = data?.barcode?.displayValue; 
+    }
+
+  }
 
   async listar() {
     try {
@@ -74,13 +108,11 @@ export class MisviajesPasajeroPage implements OnInit {
   }
 
   async scan(): Promise<void> {
-    const granted = await this.requestPermissions();
-    if (!granted) {
-      this.presentAlert();
-      return;
-    }
-    const { barcodes } = await BarcodeScanner.scan();
-    this.barcodes.push(...barcodes);
+    const formats = this.formGroup.get('formats')?.value || [];
+    const { barcodes } = await BarcodeScanner.scan({
+      formats,
+    });
+    this.barcodes = barcodes;
   }
 
   async requestPermissions(): Promise<boolean> {
