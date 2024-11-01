@@ -51,8 +51,8 @@ export class MapaComponent  implements OnInit {
   }
 
   direccion_seleccionada(){
-    const lat = parseInt(this.latitud);
-    const lng = parseInt(this.longitud);
+    const lat = parseFloat(this.latitud);
+    const lng = parseFloat(this.longitud);
 
     // Nueva url de ruta 
     let nueva_ruta = this.geometria.replaceAll('LNG', this.longitud).replaceAll('LAT', this.latitud);
