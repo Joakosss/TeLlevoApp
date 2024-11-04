@@ -155,7 +155,7 @@ export class MisviajesPasajeroPage implements OnInit {
           text: 'Que tengas buen viaje!s',
           heightAuto: false
         });
-      } else {
+      } else if (this.scanResult !== viaje) {
         Swal.fire({
           icon: 'error',
           title: 'Lo sentimos',
