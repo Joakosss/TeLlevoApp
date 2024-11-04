@@ -3,3 +3,9 @@
     right: 0;
     z-index: 1;
 }
+
+ion-modal {
+    --height: 100%; /* Asegúrate de que el modal ocupe toda la altura */
+    --width: 100%; /* Asegúrate de que el modal ocupe todo el ancho */
+}
+  

@@ -64,6 +64,10 @@ export class MisviajesPasajeroPage implements OnInit {
     }
   }
 
+  ionViewWillEnter(){
+    this.abrirMapa
+  }
+
   /* Función para abrir escaner QR */
   async startScan(){
     const modal = await this.modal.create({

@@ -19,6 +19,9 @@ export class MapaComponent  implements OnInit {
 
   ionViewWillEnter(){
     this.mapa() 
+    if (this.map) {
+      this.map.resize();
+    }
   }
   
   @Input() latitud = '';
