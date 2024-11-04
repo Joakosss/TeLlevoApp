@@ -142,5 +142,23 @@ export class MisviajesPasajeroPage implements OnInit {
     return await modal.present();
   }
 
+  escaner(viaje: string) {
+    this.startScan();
+    if (this.scanResult === viaje) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Es tu viaje :)',
+        text: 'Que tengas buen viaje!s',
+        heightAuto: false
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Lo sentimos',
+        text: 'No es tu viaje :c',
+        heightAuto: false
+      });
+    }
+  }
 
 }

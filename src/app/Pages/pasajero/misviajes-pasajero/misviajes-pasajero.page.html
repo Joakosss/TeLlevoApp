@@ -18,7 +18,7 @@
         <p>Hora: <strong>{{viaje.hora_inicio}}</strong></p>
       </div>
       <div style="text-align: center;">
-        <ion-button [disabled]="viaje.finalizado" (click)="startScan()"  color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="escaner(viaje.uid)"  color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
         <ion-button [disabled]="viaje.finalizado" (click)="abrirMapa(viaje.latitud, viaje.longitud)" color="primary">Mapa<ion-icon name="map-outline"></ion-icon></ion-button>
       </div>
     </article>
@@ -60,12 +60,12 @@
   </div> 
   
   <!--Resultados del escaner -->
-  <ion-item class="result" *ngIf="scanResult" lines="none">
+<!--   <ion-item class="result" *ngIf="scanResult" lines="none">
     <ion-label>
       <p>Resultado</p>
       <div>{{scanResult}}</div>
     </ion-label>
-  </ion-item>
+  </ion-item> -->
 </ion-content>
 
 
