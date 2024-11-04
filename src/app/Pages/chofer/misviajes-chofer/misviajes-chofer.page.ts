@@ -73,9 +73,11 @@ export class MisviajesChoferPage implements OnInit {
         text: "No podrás recuperar este viaje!",
         icon: "question",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
+        confirmButtonColor: "#3085d6",
         confirmButtonText: "Confirmar",
+        cancelButtonText: "Cancelar",
+        reverseButtons: true,
         heightAuto: false
       }).then((result) => {
         if (result.isConfirmed) {
