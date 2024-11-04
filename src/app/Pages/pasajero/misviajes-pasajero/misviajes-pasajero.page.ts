@@ -143,22 +143,24 @@ export class MisviajesPasajeroPage implements OnInit {
   }
 
   escaner(viaje: string) {
-    this.startScan();
-    if (this.scanResult === viaje) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Es tu viaje :)',
-        text: 'Que tengas buen viaje!s',
-        heightAuto: false
-      });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Lo sentimos',
-        text: 'No es tu viaje :c',
-        heightAuto: false
-      });
-    }
+    this.startScan().then(()=>{
+      if (this.scanResult === viaje) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Es tu viaje :)',
+          text: 'Que tengas buen viaje!s',
+          heightAuto: false
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos',
+          text: 'No es tu viaje :c',
+          heightAuto: false
+        });
+      }
+  });
+  this.scanResult = '';
   }
 
 }
