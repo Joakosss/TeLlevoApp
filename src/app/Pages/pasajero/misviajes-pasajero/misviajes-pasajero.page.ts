@@ -161,4 +161,38 @@ export class MisviajesPasajeroPage implements OnInit {
     }
   }
 
+  cancelarViaje(viaje: string) {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¡Podrías perder tu cupo!",
+      icon: "question",
+      showCancelButton: true,
+      cancelButtonColor: "#d33",
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar",
+      reverseButtons: true,
+      heightAuto: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.crudViaje.eliminarDelViaje(viaje, this.idUsuario).then(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Viaje Cancelado c:',
+            text: 'Te vemos en otra ocasión',
+            heightAuto: false
+          });
+        }).catch(() => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al cancelar',
+            text: 'Reinténtalo',
+            heightAuto: false
+          });
+        });
+      }
+    });
+  }
+  
+
 }

@@ -57,6 +57,19 @@ export class CrudViajeService {
     })
   }
 
+  eliminarDelViaje(id: string, idPasajero: string) {
+    const viaje = this.afs.collection('viaje').doc(id);
+    return viaje.ref.get().then(dato => {
+      const data = dato.data() as Viaje
+      const pasajerosNuevo = data.pasajeros?.filter(pasajero => pasajero!= idPasajero)
+      data.contadorPasajeros= data.contadorPasajeros+1;
+      data.pasajeros = pasajerosNuevo || [];
+
+      return viaje.update(data);
+      
+    });
+  }
+
 
   listarViajesChofer(idChofer: string) {
     return this.afs.collection('viaje', ref => ref.where('chofer', '==', idChofer)).valueChanges({idField: 'uid'})};

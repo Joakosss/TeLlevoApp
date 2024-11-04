@@ -20,6 +20,7 @@
       <div style="text-align: center;">
         <ion-button [disabled]="viaje.finalizado" (click)="escaner(viaje.uid)"  color="primary">QR<ion-icon name="qr-code"></ion-icon></ion-button>
         <ion-button [disabled]="viaje.finalizado" (click)="abrirMapa(viaje.latitud, viaje.longitud)" color="primary">Mapa<ion-icon name="map-outline"></ion-icon></ion-button>
+        <ion-button [disabled]="viaje.finalizado" (click)="cancelarViaje(viaje.uid)" color="primary">Cancelar<ion-icon name="close-outline"></ion-icon></ion-button>
       </div>
     </article>
   </section>
