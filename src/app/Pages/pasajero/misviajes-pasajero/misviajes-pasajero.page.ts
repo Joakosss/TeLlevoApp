@@ -86,8 +86,6 @@ export class MisviajesPasajeroPage implements OnInit {
     // Si hay datos en la lectura muestra el valor
     if(data){
       this.scanResult = data?.barcode?.displayValue; 
-    } else {
-      this.scanResult = '';
     }
 
   }
@@ -151,23 +149,21 @@ export class MisviajesPasajeroPage implements OnInit {
 
   escaner(viaje: string) {
     this.startScan().then(()=>{
-      if (this.scanResult) {
-        if (this.scanResult === viaje) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Es tu viaje :)',
-            text: 'Que tengas buen viaje!s',
-            heightAuto: false
-          });
-        } else if (this.scanResult !== viaje) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Lo sentimos',
-            text: 'No es tu viaje :c',
-            heightAuto: false
-          });
-        }
-      } 
+      if (this.scanResult === viaje) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Es tu viaje :)',
+          text: 'Que tengas buen viaje!s',
+          heightAuto: false
+        });
+      } else if (this.scanResult !== viaje) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos',
+          text: 'No es tu viaje :c',
+          heightAuto: false
+        });
+      }
     });
   }
 
