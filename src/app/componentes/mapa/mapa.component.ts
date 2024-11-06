@@ -18,10 +18,7 @@ export class MapaComponent  implements OnInit {
   ngOnInit():void {}
 
   ionViewWillEnter(){
-    this.mapa() 
-    if (this.map) {
-      this.map.resize();
-    }
+    this.mapa();
   }
   
   @Input() latitud = '';
@@ -50,6 +47,9 @@ export class MapaComponent  implements OnInit {
 
       // Llamar a direccion_seleccionada después de que el mapa haya cargado
       this.direccion_seleccionada();
+
+      // Ajusta el tamaño del mapa en el modal
+      this.map.resize();
     });
   }
 

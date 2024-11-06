@@ -65,7 +65,7 @@ export class MisviajesPasajeroPage implements OnInit {
   }
 
   ionViewWillEnter(){
-    this.abrirMapa
+    this.abrirMapa;
   }
 
   /* Función para abrir escaner QR */
@@ -86,6 +86,8 @@ export class MisviajesPasajeroPage implements OnInit {
     // Si hay datos en la lectura muestra el valor
     if(data){
       this.scanResult = data?.barcode?.displayValue; 
+    } else {
+      this.scanResult = '';
     }
 
   }
@@ -137,6 +139,7 @@ export class MisviajesPasajeroPage implements OnInit {
   async abrirMapa(latitud,longitud) {
     const modal = await this.modal.create({
       component: MapaComponent,
+      cssClass: 'mapa-modal',
       componentProps: {
         latitud: latitud, // Aquí pasamos el parámetro idViaje al modal,
         longitud:longitud,
@@ -148,23 +151,24 @@ export class MisviajesPasajeroPage implements OnInit {
 
   escaner(viaje: string) {
     this.startScan().then(()=>{
-      if (this.scanResult === viaje) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Es tu viaje :)',
-          text: 'Que tengas buen viaje!s',
-          heightAuto: false
-        });
-      } else if (this.scanResult !== viaje) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Lo sentimos',
-          text: 'No es tu viaje :c',
-          heightAuto: false
-        });
-      }
-  });
-  this.scanResult = '';
+      if (this.scanResult) {
+        if (this.scanResult === viaje) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Es tu viaje :)',
+            text: 'Que tengas buen viaje!s',
+            heightAuto: false
+          });
+        } else if (this.scanResult !== viaje) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Lo sentimos',
+            text: 'No es tu viaje :c',
+            heightAuto: false
+          });
+        }
+      } 
+    });
   }
 
   cancelarViaje(viaje: string) {

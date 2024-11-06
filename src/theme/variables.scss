@@ -89,3 +89,14 @@
 	  --ion-background-color: transparent;
 	}
   }
+
+/**
+  * Mapa modal
+  * -------------------------------------------
+  */
+
+  .mapa-modal {
+	--width: 90vw; /* Adjust width as needed */
+	--height: 70vh; /* Adjust height as needed */
+	--border-radius: 10px; /* Optional: round the corners */
+  }
